@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: light; }
+  body {
+    @apply bg-paper text-ink antialiased;
+    font-feature-settings: "cv05" 1, "ss03" 1;
+  }
+  /* Numerals and identifiers are data — they get the mono face everywhere. */
+  .tabular { font-variant-numeric: tabular-nums; }
+  *:focus-visible {
+    @apply outline-none ring-2 ring-archive ring-offset-2 ring-offset-paper;
+  }
+}
+
+@layer components {
+  /* The ledger rule: a 1px hairline that separates every record row.
+     Used instead of cards for lists, so density reads as a register. */
+  .ledger > * + * { @apply border-t border-rule; }
+
+  .field {
+    @apply w-full rounded border border-rule bg-white px-3 py-2 text-sm
+           placeholder:text-muted/60 focus:border-archive;
+  }
+  .label {
+    @apply mb-1.5 block font-mono text-[11px] uppercase tracking-[0.08em] text-muted;
+  }
+  .eyebrow {
+    @apply font-mono text-[11px] uppercase tracking-[0.12em] text-muted;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
